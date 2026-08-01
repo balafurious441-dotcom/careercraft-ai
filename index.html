@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerCraft AI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome Icons & Marked.js for Markdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="dark-mode">
+
+    <div class="app-layout">
+        <!-- Sidebar Drawer -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="new-chat-btn" onclick="startNewChat()">
+                    <i class="fa-solid fa-plus"></i> New Chat
+                </button>
+                <button class="icon-btn close-sidebar" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-title">Recent Career Searches</div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <div class="main-content">
+            <!-- Header Nav -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+                </div>
+
+                <div class="brand-pill">
+                    <i class="fa-solid fa-sparkles spark-icon"></i>
+                    <span class="app-title">CareerCraft AI</span>
+                    <span class="free-badge">FREE</span>
+                </div>
+
+                <div class="header-right">
+                    <!-- Export Chat Button -->
+                    <button class="icon-btn" onclick="exportChat()" title="Download Chat"><i class="fa-solid fa-download"></i></button>
+                    <!-- Theme Switcher Button -->
+                    <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme" id="themeBtn"><i class="fa-solid fa-sun"></i></button>
+                    <!-- Profile Modal Trigger -->
+                    <button class="icon-btn" onclick="toggleProfileModal()" title="Profile"><i class="fa-regular fa-user"></i></button>
+                </div>
+            </header>
+
+            <!-- Chat & Welcome Section -->
+            <main class="chat-area" id="chatArea">
+                <div class="welcome-container" id="welcomeContainer">
+                    <h2 class="welcome-heading">Shape your future with CareerCraft AI</h2>
+                    
+                    <div class="suggestion-list">
+                        <div class="suggestion-card" onclick="sendQuickPrompt('Create a professional software engineer resume outline')">
+                            <i class="fa-solid fa-file-invoice"></i>
+                            <div>
+                                <strong>Resume Builder</strong>
+                                <span>Create an ATS-friendly resume layout</span>
+                            </div>
+                        </div>
+                        <div class="suggestion-card" onclick="sendQuickPrompt('Generate top 5 behavioral interview questions and answers for a Developer role')">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <div>
+                                <strong>Mock Interview Prep</strong>
+                                <span>Practice role-specific interview Q&As</span>
+                            </div>
+                        </div>
+                        <div class="suggestion-card" onclick="sendQuickPrompt('Write a catchy and professional LinkedIn summary for a Tech Graduate')">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <div>
+                                <strong>LinkedIn Bio Generator</strong>
+                                <span>Craft an attractive profile bio</span>
+                            </div>
+                        </div>
+                        <div class="suggestion-card" onclick="sendQuickPrompt('Write an impressive Cover Letter for a Frontend Developer job application')">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div>
+                                <strong>Cover Letter Assistant</strong>
+                                <span>Draft custom application letters</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="messages-list" id="messagesList"></div>
+            </main>
+
+            <!-- Bottom Chat Input Bar -->
+            <footer class="bottom-bar">
+                <div class="input-wrapper">
+                    <button class="plus-btn" title="Career Quick Tools" onclick="startNewChat()"><i class="fa-solid fa-plus"></i></button>
+                    <input type="text" id="userInput" placeholder="Ask CareerCraft AI anything..." onkeypress="handleKeyPress(event)">
+                    <button class="mic-btn" id="micBtn" onclick="toggleVoiceInput()" title="Voice Typing"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <button class="icon-btn" onclick="toggleProfileModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h4 class="profile-name">Career Builder</h4>
+                <p class="profile-email">pro.user@careercraft.ai</p>
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <strong id="statCount">0</strong>
+                        <span>Prompts Sent</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong>Pro Tier</strong>
+                        <span>Account Plan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
